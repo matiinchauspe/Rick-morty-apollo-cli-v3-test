@@ -1,24 +1,27 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery } from "@apollo/client";
+import { useOutletContext } from "react-router-dom";
 
 import { GET_CHARACTERS } from "../../api/queries";
 
 import { Character as CharacterCard } from "../../components/Character";
-import { Grid, Row, Col } from "../../components/Grid";
+import { Grid, Col } from "../../components/Grid";
 
-const Characters = () => {
-  // const [characters, setCharacters] = useState(null);
+const Characters = (): React.ReactElement => {
   const { data, loading, error } = useQuery(GET_CHARACTERS);
+  const { filteredData, filteredLoading, filteredError } =
+    useOutletContext<any>();
 
-  // useEffect(() => {
-  //   if (data) {
-  //     setCharacters(data.characters.results);
-  //   }
-  // }, [loading]);
-  if (error) return <div>An error has occurred</div>;
-  if (loading) return <div>Loading...</div>;
+  if (error || filteredError) return <div>An error has occurred</div>;
+  if (loading || filteredLoading) return <div>Loading...</div>;
 
-  const characters = data?.characters.results;
+  let characters = data?.characters.results;
+
+  if (filteredData) {
+    characters = filteredData?.characters.results;
+  }
+
+  console.log({ filteredData });
 
   return (
     <Grid>

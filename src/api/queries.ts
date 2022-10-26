@@ -6,13 +6,7 @@ export const GET_CHARACTERS = gql`
       results {
         id
         name
-        status
         species
-        type
-        gender
-        location {
-          name
-        }
         image
       }
     }
@@ -25,7 +19,6 @@ export const GET_CHARACTER = gql`
       name
       status
       species
-      type
       gender
       origin {
         name
@@ -34,6 +27,19 @@ export const GET_CHARACTER = gql`
         name
       }
       image
+    }
+  }
+`;
+
+export const GET_FILTERED_CHARACTERS = gql`
+  query GetFilteredCharacters($name: String!) {
+    characters(page: 1, filter: { name: $name }) {
+      results {
+        id
+        name
+        species
+        image
+      }
     }
   }
 `;

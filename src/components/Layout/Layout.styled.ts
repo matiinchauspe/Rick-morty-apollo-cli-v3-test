@@ -6,6 +6,10 @@ export const Title = styled.h1`
 `;
 
 export const Header = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid lightgray;
   padding: 10px;
 `;
@@ -32,5 +36,5 @@ export const Main = styled.div`
   font-size: ${(props: StyledProps<any>) => props.theme.color};
   overflow: hidden;
   scroll-behavior: smooth;
-  overflow-y: scroll;
+  overflow-y: auto;
 `;
