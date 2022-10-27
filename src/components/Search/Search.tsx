@@ -7,7 +7,7 @@ const Search = ({ getCharacters }: SearchTypes): React.ReactElement => {
   const inputRef = useRef<any>(null);
 
   const handleSearch = useCallback((): void => {
-    getCharacters({ variables: { name: inputRef.current.value } });
+    getCharacters({ name: inputRef.current.value });
   }, []);
 
   return (

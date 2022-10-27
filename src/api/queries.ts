@@ -1,13 +1,19 @@
 import { gql } from "@apollo/client";
 
 export const GET_CHARACTERS = gql`
-  query GetCharacters {
-    characters(page: 1) {
+  query GetCharacters($page: Int) {
+    characters(page: $page) {
       results {
         id
         name
         species
         image
+      }
+      info {
+        count
+        pages
+        prev
+        next
       }
     }
   }
@@ -32,13 +38,19 @@ export const GET_CHARACTER = gql`
 `;
 
 export const GET_FILTERED_CHARACTERS = gql`
-  query GetFilteredCharacters($name: String!) {
-    characters(page: 1, filter: { name: $name }) {
+  query GetFilteredCharacters($page: Int, $name: String) {
+    characters(page: $page, filter: { name: $name }) {
       results {
         id
         name
         species
         image
+      }
+      info {
+        count
+        pages
+        prev
+        next
       }
     }
   }
