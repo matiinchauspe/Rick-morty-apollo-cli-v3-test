@@ -1,4 +1,4 @@
 export interface Search {
-  getCharacters({}): void;
-  // inputRef: any;
+  searchRef: any;
+  onSearch({}): void;
 }

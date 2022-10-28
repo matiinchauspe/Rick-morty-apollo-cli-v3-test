@@ -1,21 +1,20 @@
-import React, { useRef, useCallback } from "react";
+import React, { memo, useCallback } from "react";
 
 import { Search as SearchTypes } from "./types";
 import { Container, Input, Button } from "./Search.styled";
 
-const Search = ({ getCharacters }: SearchTypes): React.ReactElement => {
-  const inputRef = useRef<any>(null);
-
+const Search = ({ searchRef, onSearch }: SearchTypes): React.ReactElement => {
   const handleSearch = useCallback((): void => {
-    getCharacters({ name: inputRef.current.value });
+    const value = searchRef.current.value;
+    onSearch({ variables: { name: value } });
   }, []);
 
   return (
     <Container>
-      <Input name="search" placeholder="Búsqueda" ref={inputRef} />
+      <Input name="search" placeholder="Búsqueda" ref={searchRef} />
       <Button onClick={handleSearch}>Buscar</Button>
     </Container>
   );
 };
 
-export default Search;
+export default memo(Search);
